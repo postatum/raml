@@ -39,7 +39,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	yaml "github.com/advance512/yaml"
+	yaml "github.com/buddhamagnet/yaml"
 )
 
 // Parse a RAML file. Returns a raml.APIDefinition value or an error if
