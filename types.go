@@ -536,6 +536,8 @@ type Method struct {
 	// Briefly describes what the method does to the resource
 	Description string
 
+	DisplayName string `yaml:"displayName"`
+
 	// Applying a securityScheme definition to a method overrides whichever
 	// securityScheme has been defined at the root level. To indicate that
 	// the method is protected using a specific security scheme, the method
