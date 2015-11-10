@@ -366,7 +366,6 @@ type Trait struct {
 // doesn't contain Usage, optional fields etc.
 type ResourceTypeMethod struct {
 	Name string
-	// TODO: Fill this during the post-processing phase
 
 	// Briefly describes what the method does to the resource
 	Description string
@@ -531,7 +530,6 @@ type SecurityScheme struct {
 // Methods are operations that are performed on a resource
 type Method struct {
 	Name string
-	// TODO: Fill this during the post-processing phase
 
 	// Briefly describes what the method does to the resource
 	Description string

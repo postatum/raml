@@ -90,3 +90,21 @@ func TestParsing(t *testing.T) {
 		// 	pretty.Println(apiDefinition)
 	}
 }
+
+func TestMethodStringer(t *testing.T) {
+	def, _ := ParseFile("./samples/simple_example.raml")
+	r := def.Resources["/resources"]
+	if r.Get.Name != "GET" {
+		t.Errorf("Got %s, instead of GET", r.Get.Name)
+	}
+	n := r.Nested["/{resourceId}"]
+	if n.Get.Name != "GET" {
+		t.Errorf("Got %s, instead of GET", n.Get.Name)
+	}
+	if n.Put.Name != "PUT" {
+		t.Errorf("Got %s, instead of PUT", n.Put.Name)
+	}
+	if n.Delete.Name != "DELETE" {
+		t.Errorf("Got %s, instead of DELETE", n.Delete.Name)
+	}
+}
