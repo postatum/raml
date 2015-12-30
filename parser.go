@@ -116,13 +116,13 @@ func ParseFile(filePath string) (*APIDefinition, error) {
 		return nil, ramlError
 	}
 
-	postProcess(apiDefinition)
+	PostProcess(apiDefinition)
 
 	// Good.
 	return apiDefinition, nil
 }
 
-func postProcess(d *APIDefinition) {
+func PostProcess(d *APIDefinition) {
 	for _, r := range d.Resources {
 		addMethodNames(&r)
 	}
