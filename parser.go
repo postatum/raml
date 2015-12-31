@@ -75,9 +75,9 @@ func ParseFile(filePath string) (*APIDefinition, error) {
 		// versions in the same package - we'll have different branches
 		// for different versions. This one is hard-coded to 0.8.
 		// Still, would be good to think about this.
-		if ramlVersion != "#%RAML 0.8" {
-			return nil, errors.New("Input file is not a RAML 0.8 file. Make " +
-				"sure the file starts with #%RAML 0.8")
+		if ramlVersion != "#%RAML 1.0" {
+			return nil, errors.New("Input file is not a RAML 1.0 file. Make " +
+				"sure the file starts with #%RAML 1.0")
 		}
 	}
 
@@ -118,7 +118,6 @@ func ParseFile(filePath string) (*APIDefinition, error) {
 
 	PostProcess(apiDefinition)
 
-	// Good.
 	return apiDefinition, nil
 }
 
@@ -153,7 +152,7 @@ func addMethodNames(r *Resource) {
 	}
 }
 
-// Reads the contents of a file, returns a bytes buffer
+// readFileContents reads the contents of a file.
 func readFileContents(workingDirectory string, fileName string) ([]byte, error) {
 
 	filePath := filepath.Join(workingDirectory, fileName)
@@ -161,15 +160,12 @@ func readFileContents(workingDirectory string, fileName string) ([]byte, error) 
 	if fileName == "" {
 		return nil, fmt.Errorf("File name cannot be nil: %s", filePath)
 	}
-
-	// Read the file
 	fileContentsArray, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return nil,
 			fmt.Errorf("Could not read file %s (Error: %s)",
 				filePath, err.Error())
 	}
-
 	return fileContentsArray, nil
 }
 
@@ -181,8 +177,7 @@ func preProcess(originalContents io.Reader, workingDirectory string) ([]byte, er
 	// does NOT play nice with !include tags, this has to be done like this.
 	// I am considering modifying go-yaml to add custom handlers for specific
 	// tags, to add support for !include, but for now - this method is
-	// GoodEnough(TM) and since it will only happen once, I am not prematurely
-	// optimizing it.
+	// GoodEnough(TM).
 
 	var preprocessedContents bytes.Buffer
 
@@ -243,7 +238,7 @@ func preProcess(originalContents io.Reader, workingDirectory string) ([]byte, er
 
 		} else {
 
-			// No, just a simple line.. write it
+			// No, just a simple line...write it
 			preprocessedContents.WriteString(line)
 			preprocessedContents.WriteByte('\n')
 		}
